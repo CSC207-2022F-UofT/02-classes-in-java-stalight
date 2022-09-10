@@ -3,10 +3,10 @@ import java.util.Arrays;
 /**
  * This file contains a few exercises to familiarize you with specific
  * class features in Java.
- *
+ *<p>
  * You should read this file from top-to-bottom. Any tasks you are to complete
  * are labelled with TODO
- *
+ *<p>
  * For your convenience, we have also included references to the
  * relevant readings for each task.
  */
@@ -16,11 +16,11 @@ public class Silly implements Comparable<Silly>{
      * 1. Java has variables known as "static" variables.
      * These are variables that exist in every instance of a class,
      * and which have the same value across all instances.
-     *
+     *<p>
      * Below we have created a static variable (signified by the keyword
      * static) named my_static. The countStatic() method makes use of this
      * static variable.
-     *
+     *<p>
      * (Relevant reading: 2.1. Static variables)
      */
     public static int my_static = 0;
@@ -45,10 +45,10 @@ public class Silly implements Comparable<Silly>{
      * 2. Java allows for us to overload methods: this means we can have
      *    multiple methods of the same name, but which take different
      *    parameters (both in terms of numbers and type).
-     *
+     * <p>
      *    Below we have created two different constructors and have left
      *    a third for you to write.
-     *
+     *    <p>
      *    (Relevant reading: 2.2. Overloading)
      */
 
@@ -79,6 +79,7 @@ public class Silly implements Comparable<Silly>{
      *       strings (e.g. this.name = [first string] + [second string]).
      *       Make sure you document this method!
      */
+    public Silly(String first, String second){this.name = first + second; }
 
 
 
@@ -88,10 +89,10 @@ public class Silly implements Comparable<Silly>{
         /**
          * Task 1 (continued): The below demonstrates how each of the Silly
          *                     constructors are called.
-         *
+
          * This is simply provided as an example for you to see whether your
          * code is working correctly, and to see how the different calls appear
-         *
+
          * To run this, Task 3 is also required to be completed.
          */
         Silly first_version = new Silly("single str name");
@@ -116,17 +117,17 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
 
     /**
-     * 3. Whenever we try to build a string with an Object, the toString()
+         * 3. Whenever we try to build a string with an Object, the toString()
      *    method is called. This is equivalent to the __str__ method in Python.
-     *
+
      *    (Relevant reading: 2.3. toString)
-     *
+
      * Return the String representation of this Silly object (i.e. its name).
      *
      * @return the name of this Silly.
@@ -134,13 +135,14 @@ public class Silly implements Comparable<Silly>{
     @Override
     public String toString(){
         // TODO (Task 3): Implement the body of this method!
+        return this.name;
     }
 
     /**
      * 4. We can also override the equals() method, which is the equivalent of
      *    Python's __eq__; however, unlike Python, this is called when we use
      *    .equals() rather than == (which checks for ID equality in Java).
-     *
+     *<p>
      *    (Relevant reading: 2.4. Equality)
      *
      * @param o   the object to compare to
@@ -161,6 +163,7 @@ public class Silly implements Comparable<Silly>{
 
         // Hint: to compare strings, we need to use .equals()
         //       e.g. s1.equals(s2)
+        return other.name.equals(this.name);
     }
 
     /**
@@ -171,11 +174,11 @@ public class Silly implements Comparable<Silly>{
      *    ii) override the compareTo method. This takes another object
      *        (of the same type if we specify the classname when we write
      *        'implements Comparable'), and returns an integer.
-     *
+     *<p>
      *    (Relevant reading: 2.5. Comparing objects)
-     *
+     *<p>
      * Compares this object with other for order.
-     *
+     *<p>
      * Returns a negative integer, zero, or a positive integer as this
      * object is less than, equal to, or greater than the specified object.
      *
@@ -194,6 +197,15 @@ public class Silly implements Comparable<Silly>{
          *                You can get the length of a string by using the
          *                .length() method.
          */
+        int len_of_this = this.name.length();
+        int len_of_other = other.name.length();
+        if (len_of_this > len_of_other){
+            return 1;
+        } else if (len_of_this < len_of_other) {
+            return -1;
+        }else {
+            return 0;
+        }
     }
 
     /*
